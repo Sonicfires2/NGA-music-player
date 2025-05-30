@@ -1,1 +1,1 @@
-This is a Python based music player.
+This is a Python based music player. This is a side project I am working on for fun.
