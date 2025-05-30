@@ -4,7 +4,6 @@ import os
 import sys
 from prompt_toolkit.shortcuts import radiolist_dialog
 
-
 def view_songs():
     songs = [f for f in os.listdir("downloads") if f.endswith(".mp3")]
     if not songs:
@@ -37,7 +36,6 @@ def view_songs():
                 sys.exit(0)
             else:
                 print("Invalid option, please choose 1, 2, or 3.")
-
 
 def main():
     os.makedirs("downloads", exist_ok=True)
