@@ -48,7 +48,7 @@ def download_audio(query):
     ]
 
     print("🔄 Running command:", " ".join(cmd))
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=False, text=False)
     print(result.stdout)
     if result.returncode != 0:
         print("❌ yt-dlp failed:", result.stderr)

@@ -5,12 +5,12 @@ import sys
 from prompt_toolkit.shortcuts import radiolist_dialog
 
 def view_songs():
-    songs = [f for f in os.listdir("downloads") if f.endswith(".mp3")]
-    if not songs:
-        print("⚠️ No songs available. Download some first.")
-        return
-
     while True:
+        songs = [f for f in os.listdir("downloads") if f.endswith(".mp3")]
+        if not songs:
+            print("⚠️ No songs available. Download some first.")
+            return
+
         # Display interactive song list
         song = radiolist_dialog(
             title="Your Songs",
@@ -23,9 +23,10 @@ def view_songs():
         # Song action menu
         while True:
             print(f"\nSelected: {song}")
-            print("1. Play")
-            print("2. Back")
-            print("3. Exit")
+            print("1. ▶️ Play")
+            print("2. 🔙 Back to Song List")
+            print("3. ❌ Exit")
+            print("4. 🗑️ Delete Song")
             choice = input("Choose an option: ")
             if choice == "1":
                 print(f"▶️ Playing {song}...")
@@ -34,8 +35,19 @@ def view_songs():
                 break  # back to song list
             elif choice == "3":
                 sys.exit(0)
+            elif choice == "4":
+                confirm = input(f"Are you sure you want to delete '{song}'? (y/n): ").lower()
+                if confirm == "y":
+                    try:
+                        os.remove(os.path.join("downloads", song))
+                        print(f"🗑️ Deleted '{song}' successfully.")
+                        break  # go back to song list since it's now gone
+                    except Exception as e:
+                        print(f"❌ Error deleting song: {e}")
+                else:
+                    print("Deletion cancelled.")
             else:
-                print("Invalid option, please choose 1, 2, or 3.")
+                print("Invalid option, please choose 1, 2, 3, or 4.")
 
 def main():
     os.makedirs("downloads", exist_ok=True)
