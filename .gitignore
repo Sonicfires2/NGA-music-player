@@ -1,3 +1,7 @@
 venv/
 downloads/
 ffmpeg/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
